@@ -1,8 +1,14 @@
 package com.example.akash.mediascanner;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import org.json.JSONObject;
 
@@ -14,49 +20,34 @@ import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
+    Bitmap pic;
+    ImageView photo;
+    Button take;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        photo = (ImageView)findViewById(R.id.photo);
+        take = (Button)findViewById(R.id.take);
 
+        take.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,0);
+            }
+        });
 
     }
 
-    public class apiAccess extends AsyncTask<String , Void , Void> {
-        public String st;
-        @Override
-        protected Void doInBackground(String... strings) {
-            try {
-                String code = strings[0];
-                URL url = new URL("http://api.openweathermap.org/data/2.5/forecast?zip="+code+"&appid=bc3a5fe021c3c556d184b37ad0f18aa2");
-
-                URLConnection urlConnection = url.openConnection();
-
-                InputStream in = urlConnection.getInputStream();
-
-                InputStreamReader reader = new InputStreamReader(in);
-
-                BufferedReader br = new BufferedReader(reader);
-                st = br.readLine();
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        pic = (Bitmap)data.getExtras().get("data");
+        photo.setImageBitmap(pic);
+    }
 
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
 
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            try{
-                JSONObject mainObject = new JSONObject(st);
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }}
+}
