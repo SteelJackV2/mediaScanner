@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.akash.mediascanner.MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/take"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take Photo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.971" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.akash.mediascanner.MainActivity"
+        android:id="@+id/relativeLayout">
 
-    <ImageView
-        android:id="@+id/photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/imageProgress"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:srcCompat="@android:drawable/alert_dark_frame"
+            app:layout_constraintTop_toBottomOf="@+id/imageProgress"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/takePicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take Picture"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imageView" />
+
+        <Spinner
+            android:id="@+id/spinnerVisionAPI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/takePicture"
+            app:layout_constraintEnd_toStartOf="@+id/takePicture"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/visionAPIData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="370dp"
+            android:gravity="left"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/takePicture"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/spinnerVisionAPI"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerVisionAPI"
+            tools:text="Text LAbele" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
