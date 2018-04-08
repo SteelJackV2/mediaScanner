@@ -17,6 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".movieDetails"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".bookDetails"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA" />
